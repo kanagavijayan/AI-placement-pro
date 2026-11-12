@@ -1,158 +1,194 @@
 # AI PLACEMENT PRO 🎓🚀
-### *Your Personal AI Placement Preparation Partner*
+### Your Personal AI Placement Preparation Partner
 
-**AI PLACEMENT PRO** is a full-stack, autonomous, placement training platform engineered to prepare college engineering and graduate students for campus placements and technical recruitment drives.
+AI PLACEMENT PRO is a full-stack AI-powered placement training platform designed to help college students prepare for campus placements and technical recruitment drives.
 
-The application integrates **four dedicated AI Placement Agents** with an interactive **Track Me** performance analytics engine, timed mock examinations, company-oriented preparation guides, an ATS resume builder, and an adaptive AI study planner.
+The application integrates four dedicated AI Placement Agents, an interactive Track Me performance analytics engine, timed mock examinations, company-oriented preparation guides, an ATS resume builder, and an adaptive AI study planner.
 
 ---
 
-## 🌟 Key Features & Systems
+## 🌟 Key Features
 
 ### 1. Student Performance Dashboard
-- **Overall Placement Preparation Percentage:** Dynamically computed from test scores, coding submissions, and study logs.
-- **Total Learning Hours:** Stored and aggregated in SQLite from live timer tracking.
-- **Coding Problems Solved:** Real-time counter of verified algorithmic submissions.
-- **Sectional Scores:** Quantitative Aptitude, Technical Interview, and HR / Behavioral readiness.
-- **Daily Learning Streak:** Flame-animated consecutive day counter based on study activities.
-- **Weekly Progress Chart:** Interactive **Chart.js** bar visualization of hours studied over the past 7 days.
-- **Active Study Goals & Recent Activities Feed:** Real-time record of completed milestones.
+- Overall placement preparation percentage.
+- Total learning hours tracked using SQLite.
+- Coding problems solved counter.
+- Sectional scores for Aptitude, Technical, and HR.
+- Daily learning streak.
+- Weekly progress charts using Chart.js.
+- Active study goals and recent activities.
 
 ### 2. Four Specialized AI Placement Agents
-- 🧮 **Agent 1: Aptitude Agent**
-  - Quantitative Aptitude (Time & Work, Speed-Distance, Probability, Permutations, Profit & Loss).
-  - Logical Reasoning (Syllogisms, Blood Relations, Coding-Decoding).
-  - Verbal Ability & Grammar.
-  - Step-by-step mathematical breakdowns, shortcuts, and timed verification.
-- 💻 **Agent 2: Coding Agent**
-  - Languages: Python, Java, C++, and C.
-  - Core DSA: Trees, Graphs, Dynamic Programming, Heaps, Two Pointers.
-  - Built-in interactive code editor with syntax formatting and one-click testcase runner.
-  - Big-O Time & Space Complexity analysis and code debugging.
-- 🎙 **Agent 3: Technical Interview Agent**
-  - Core CS Fundamentals: DBMS, Operating Systems, Computer Networks, OOP, System Design.
-  - Interactive mock technical rounds with real-time scoring (out of 10), technical depth critique, and model answer formulation.
-- 👔 **Agent 4: HR Interview Agent**
-  - "Tell Me About Yourself" 3-part elevator pitch coaching (Present ➔ Past ➔ Future).
-  - Behavioral questions evaluated using the **STAR Method** (Situation, Task, Action, Result).
-  - Conflict resolution, career goals, weakness reframing, and group discussion etiquette.
 
-### 3. Track Me System (Personal Performance Tracker)
-- **Live Study Timer Widget:**
-  - Select subject (DSA, Aptitude, DBMS, OS, Networks, HR, etc.).
-  - **START TRACKING** countup timer with glowing animated indicators.
-  - **STOP & SAVE SESSION** automatically commits duration to SQLite and increments total learning hours.
-- **ADD PROGRESS Modal:** Manually record completed topics, difficulty levels, solved counts, and study takeaways.
-- **Achievement Badges:** Automatically unlocks badges (*First Track, Consistency Champion, Code Warrior, Aptitude Ace, Week Titan*).
-- **Persistent SQLite Tables:** Full historical logs of all sessions and progress entries survive application restarts.
+**🧮 Agent 1: Aptitude Agent**
+- Quantitative Aptitude.
+- Logical Reasoning.
+- Verbal Ability and Grammar.
+- Step-by-step solutions and shortcuts.
+
+**💻 Agent 2: Coding Agent**
+- Python, Java, C++, and C.
+- Data Structures and Algorithms.
+- Trees, Graphs, Dynamic Programming, and Heaps.
+- Code debugging and complexity analysis.
+
+**🎙 Agent 3: Technical Interview Agent**
+- DBMS, Operating Systems, Computer Networks, and OOP.
+- System Design fundamentals.
+- Interactive technical mock interviews.
+- Interview feedback and model answers.
+
+**👔 Agent 4: HR Interview Agent**
+- Tell Me About Yourself coaching.
+- STAR method behavioral questions.
+- Career goals and weakness analysis.
+- Conflict resolution and group discussion preparation.
+
+### 3. Track Me – Personal Performance Tracker
+- Live study timer.
+- Subject selection.
+- Start and stop study sessions.
+- Automatic SQLite session storage.
+- Manual progress tracking.
+- Achievement badges.
+- Historical study records.
 
 ### 4. AI Personalized Study Planner
-- Analyzes individual student weaknesses across tests and practice logs.
-- Isolates lowest-scoring subjects and generates daily study schedules (Morning, Afternoon, Evening blocks).
-- Constructs weekly milestone roadmaps and suggests next immediate learning activities.
+- Identifies weak subjects.
+- Generates personalized daily schedules.
+- Morning, afternoon, and evening study plans.
+- Weekly milestone roadmaps.
+- Personalized learning recommendations.
 
 ### 5. Mock Test System
-- Timed assessments for Quantitative Aptitude, Core CS MCQs, and DSA Complexity Quizzes.
-- Live countdown timer, question palette navigation, and early submit option.
-- Automatic evaluation engine with instant score percentage, correct/incorrect status, and in-depth explanations for every option.
+- Quantitative Aptitude tests.
+- Core Computer Science MCQs.
+- DSA complexity quizzes.
+- Countdown timer.
+- Question navigation.
+- Automatic evaluation and explanations.
 
 ### 6. ATS-Friendly Resume Builder
-- Structured editor for Profile, Education, Experience, Projects, and Skills.
-- **AI Bullet Optimizer:** Enhances project statements with action verbs and quantifiable metrics.
-- Synchronized live preview on a standard ATS-compliant template.
-- Direct **Print / PDF Download** with dedicated `@media print` stylesheet.
+- Profile and education sections.
+- Experience and project details.
+- Skills management.
+- AI bullet point optimization.
+- Live resume preview.
+- Print and PDF download.
 
-### 7. Company Preparation (9 Top Employers)
-- Dedicated syllabi, recruitment rounds, and preparation strategies for:
-  - **TCS** (Ninja, Digital, Prime)
-  - **Infosys** (Systems Engineer, Specialist Programmer)
-  - **Wipro** (Elite, Turbo)
-  - **Accenture** (Associate Software Engineer, Advanced ASE)
-  - **Cognizant** (GenC, GenC Elevate, GenC Next)
-  - **Capgemini** (Analyst, Game-based assessment)
-  - **Zoho** (Application design & core logic)
-  - **Amazon** (SDE-1, 16 Leadership Principles)
-  - **Microsoft** (DSA, System design, Growth mindset)
+### 7. Company Preparation
+
+Preparation resources for nine leading companies:
+
+1. TCS
+2. Infosys
+3. Wipro
+4. Accenture
+5. Cognizant
+6. Capgemini
+7. Zoho
+8. Amazon
+9. Microsoft
 
 ---
 
 ## 🛠 Technology Stack
 
-- **Frontend:** HTML5, CSS3, JavaScript (Vanilla ES6+), Chart.js 4, FontAwesome 6, Google Plus Jakarta Sans & Fira Code.
-- **Backend:** Python Flask 3.1, SQLite 3, Werkzeug Security (PBKDF2 SHA-256 password hashing).
-- **AI Engine:** Google Gemini API (`google-genai` SDK and REST endpoint) + Autonomous Domain-Expert Local Knowledge Engine for seamless offline / keyless operation.
-- **Design:** Modern Dark Navy (`#0b0f19`) & Royal Purple (`#7c3aed`) SaaS theme with instant toggleable Light Mode.
+| Component | Technologies |
+|---|---|
+| Frontend | HTML5, CSS3, JavaScript |
+| UI Charts | Chart.js 4 |
+| Backend | Python Flask 3.1 |
+| Database | SQLite 3 |
+| Security | Werkzeug Security |
+| AI Integration | Google Gemini API |
+| SDK | google-genai |
+| Design | Dark Navy and Royal Purple SaaS Theme |
 
 ---
 
-## 🚀 Quick Start Guide (Windows PowerShell)
+## 🚀 Installation and Setup
 
-### Step 1: Open PowerShell and navigate to the project folder
-```powershell
-cd c:\Users\SHANTHOSH\OneDrive\Desktop\projectNN
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/kanagavijayan/AI-placement-pro.git
 ```
 
-### Step 2: Initialize or verify the SQLite database
-```powershell
+### Step 2: Navigate to the Project Folder
+
+```bash
+cd AI-placement-pro
+```
+
+### Step 3: Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4: Configure Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+Gemini API configuration is optional if the local knowledge engine supports the requested functionality.
+
+### Step 5: Initialize the Database
+
+```bash
 python database.py
 ```
 
-### Step 3: Run the automated test suite
-```powershell
-python test_suite.py
-```
+### Step 6: Run the Application
 
-### Step 4: Start the AI PLACEMENT PRO server
-```powershell
+```bash
 python app.py
 ```
 
-### Step 5: Open your web browser
-Visit: **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
+### Step 7: Open in Browser
+
+Visit:
+
+http://127.0.0.1:5000
 
 ---
 
 ## 🔑 Demo Login Credentials
 
-For quick testing, pre-seeded accounts are immediately available:
+| Role | Username | Password |
+|---|---|---|
+| Student | demo | demo123 |
+| Administrator | admin | admin123 |
 
-| Role | Username | Password | Notes |
-| :--- | :--- | :--- | :--- |
-| **Student** | `demo` | `demo123` | Pre-populated with study history, goals, and test records |
-| **Administrator** | `admin` | `admin123` | Administrative overview privileges |
-
-You can also click **"Register Student"** on the auth page to create a brand new student account!
+*Demo credentials are available only if the application initializes these accounts.*
 
 ---
 
-## ⚙️ Google Gemini API Configuration (Optional)
+## 📋 Database Architecture
 
-The application includes an **Autonomous Expert Knowledge Engine** that handles aptitude, coding, technical rounds, and HR feedback right out of the box with zero setup required.
+The SQLite database (`placement_pro.db`) contains the following tables:
 
-To connect live Gemini Generative AI models:
-1. Obtain a free API key at [Google AI Studio](https://aistudio.google.com/).
-2. Either:
-   - Add `GEMINI_API_KEY=your_key_here` to the `.env` file in the project root.
-   - Or enter it directly in the in-app **Settings** screen (`13. Settings` in the sidebar).
-
----
-
-## 📋 Database Architecture (SQLite)
-
-The SQLite database file is stored at `placement_pro.db` and contains 10 relational tables:
-1. `users`: Credentials, roles (student/admin), timestamps.
-2. `student_profiles`: Academic branch, CGPA, target dream companies, target package.
-3. `study_sessions`: Timer records, subjects, duration in seconds/minutes, notes.
-4. `study_goals`: Daily and weekly targets, progress counters, completion status.
-5. `progress_records`: Manual topic entries, difficulty ratings, questions solved.
-6. `test_results`: Examination scores, correct answer counts, full JSON solution details.
-7. `coding_submissions`: Code drafts, runtimes, status (Accepted / Wrong Answer).
-8. `ai_conversations`: Persistent chat history with all 4 AI agents.
-9. `achievements`: Dynamic badge unlock records.
-10. `resumes`: Structured candidate resume data with ATS scoring.
+1. `users` – User accounts and roles.
+2. `student_profiles` – Student academic details.
+3. `study_sessions` – Study timer records.
+4. `study_goals` – Learning targets.
+5. `progress_records` – Student progress.
+6. `test_results` – Examination results.
+7. `coding_submissions` – Coding practice records.
+8. `ai_conversations` – AI chat history.
+9. `achievements` – Achievement records.
+10. `resumes` – Resume information.
 
 ---
 
-*AI PLACEMENT PRO — Your Personal AI Placement Preparation Partner.*
+## 🎯 Project Objective
 
-"# AI-placement-pro" 
+To provide students with an intelligent, personalized, and comprehensive placement preparation platform that improves technical knowledge, coding ability, interview confidence, and overall placement readiness.
+
+---
+
+**AI PLACEMENT PRO – Your Personal AI Placement Preparation Partner.** 🚀
