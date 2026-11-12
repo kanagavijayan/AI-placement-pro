@@ -1,0 +1,145 @@
+/* ==========================================================================
+   AI PLACEMENT PRO – Resume Builder Bento & Printable Styles
+   ========================================================================== */
+
+.resume-bento-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.resume-editor-pane {
+  background: var(--bg-card-white);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  padding: 26px;
+}
+
+.resume-preview-pane {
+  position: sticky;
+  top: 30px;
+}
+
+.ats-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: var(--border-ink);
+  background: var(--accent-yellow);
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: var(--ink-primary);
+}
+
+/* Printable Clean ATS Resume Sheet */
+.ats-resume-sheet {
+  background: #FFFFFF;
+  border: var(--border-ink);
+  border-radius: 16px;
+  color: #111827;
+  padding: 38px 44px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Times New Roman', Times, serif;
+  line-height: 1.45;
+  font-size: 11pt;
+}
+
+.ats-header {
+  text-align: center;
+  border-bottom: 2px solid #111;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.ats-name {
+  font-size: 22pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #111;
+}
+
+.ats-contact-line {
+  font-size: 9.5pt;
+  color: #4B5563;
+  margin-top: 4px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ats-section {
+  margin-bottom: 14px;
+}
+
+.ats-section-title {
+  font-size: 11.5pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2px;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.ats-item-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 10.5pt;
+  color: #111;
+}
+
+.ats-item-sub {
+  display: flex;
+  justify-content: space-between;
+  font-style: italic;
+  font-size: 10pt;
+  color: #4B5563;
+  margin-bottom: 3px;
+}
+
+.ats-bullets {
+  padding-left: 20px;
+  font-size: 10pt;
+  color: #374151;
+}
+
+.ats-skills-block {
+  font-size: 10pt;
+  color: #374151;
+  line-height: 1.5;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .ats-resume-sheet, .ats-resume-sheet * {
+    visibility: visible;
+  }
+  .ats-resume-sheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 15mm;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .resume-bento-layout {
+    grid-template-columns: 1fr;
+  }
+  .resume-preview-pane {
+    position: static;
+  }
+}

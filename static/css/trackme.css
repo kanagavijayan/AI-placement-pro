@@ -1,0 +1,206 @@
+/* ==========================================================================
+   AI PLACEMENT PRO – Track Me Engine Bento Styling
+   ========================================================================== */
+
+/* Live Study Timer Hero Card */
+.track-timer-hero {
+  background: var(--bg-card-cream);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  padding: 32px 36px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  box-shadow: 0 4px 0 var(--ink-primary);
+  position: relative;
+}
+
+.timer-left-details {
+  max-width: 440px;
+}
+
+.timer-left-details h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.timer-left-details p {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+/* Center Giant Digital Clock */
+.timer-center-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.timer-display-num {
+  font-family: var(--font-mono);
+  font-size: 3.6rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--ink-primary);
+  background: var(--bg-card-white);
+  border: var(--border-ink);
+  border-radius: 20px;
+  padding: 10px 32px;
+  box-shadow: 0 3px 0 var(--ink-primary);
+  line-height: 1;
+}
+
+.timer-display-num.running {
+  background: var(--accent-yellow);
+  animation: pulseTimer 1.6s infinite alternate;
+}
+
+@keyframes pulseTimer {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.02); }
+}
+
+.timer-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Streak Bento Card */
+.streak-box-bento {
+  background: var(--bg-card-white);
+  border: var(--border-ink);
+  border-radius: 22px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 3px 0 var(--ink-primary);
+}
+
+.streak-flame-glyph {
+  font-size: 2.2rem;
+  color: var(--accent-orange);
+}
+
+.streak-num-bold {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.streak-label-sub {
+  font-size: 0.74rem;
+  color: var(--ink-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* Track Me Bento Lower Grid */
+.track-bento-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+/* Badges Container */
+.badges-bento-shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.badge-item-card {
+  background: var(--bg-card-white);
+  border: var(--border-ink);
+  border-radius: 18px;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition);
+}
+.badge-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 var(--ink-primary);
+}
+
+.badge-glyph-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: var(--border-ink);
+  background: var(--accent-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.badge-item-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--ink-primary);
+}
+.badge-item-desc {
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+/* Clean Ledger Data Table */
+.ledger-table-wrap {
+  border: var(--border-ink);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-card-white);
+}
+
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.ledger-table th {
+  background: var(--bg-card-cream);
+  padding: 12px 18px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: var(--border-ink);
+  color: var(--ink-primary);
+}
+
+.ledger-table td {
+  padding: 13px 18px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.08);
+}
+
+.ledger-table tr:hover td {
+  background: rgba(229, 223, 213, 0.4);
+}
+
+@media (max-width: 992px) {
+  .track-timer-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  .track-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}

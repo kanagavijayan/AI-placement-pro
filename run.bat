@@ -1,0 +1,6 @@
+@echo off
+title AI PLACEMENT PRO
+echo Starting AI PLACEMENT PRO...
+echo Opening http://127.0.0.1:5000 in your browser...
+python app.py
+pause

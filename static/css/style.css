@@ -1,0 +1,854 @@
+/* ==========================================================================
+   AI PLACEMENT PRO – Neo-Minimalist Warm Bento Grid Design System
+   Inspired by editorial minimalism, warm beige/cream cards, crisp black ink borders
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+
+:root {
+  /* Canvas & Card Fills (From Screenshot) */
+  --bg-canvas: #EDE8E1;        /* Outer canvas warm sand */
+  --bg-sheet: #FAF8F5;         /* Main application sheet */
+  --bg-card-white: #FFFFFF;    /* Crisp white bento card */
+  --bg-card-cream: #E5DFD5;    /* Warm beige/latte card */
+  --bg-card-cream-light: #ECE7DE;
+  --bg-pill-nav: #E6E0D6;      /* Top pill navbar fill */
+
+  /* Inks & Outlines */
+  --ink-primary: #121212;      /* Deep black ink */
+  --ink-muted: #52504C;        /* Warm medium gray */
+  --ink-dim: #7C7872;          /* Soft light gray */
+  --border-ink: 1.5px solid #141414; /* Signature crisp dark border */
+  --border-subtle: 1px solid rgba(20, 20, 20, 0.12);
+
+  /* Colorful Accent Badges */
+  --accent-orange: #FF6838;    /* Terracotta / orange circle & diamonds */
+  --accent-orange-bg: #FFEBE4;
+  --accent-yellow: #EBF08D;    /* Lime yellow pill */
+  --accent-yellow-dark: #D4DA68;
+  --accent-cyan: #4A90E2;
+  --accent-green: #2E7D32;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  /* Radii */
+  --radius-card: 26px;
+  --radius-card-sm: 18px;
+  --radius-pill: 50px;
+
+  /* Smooth Transitions */
+  --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Outer Shell / Sheet */
+.app-sheet {
+  width: 100%;
+  max-width: 1560px;
+  background: var(--bg-sheet);
+  border: var(--border-ink);
+  border-radius: 36px;
+  padding: 28px 32px 48px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+  min-height: 94vh;
+  display: flex;
+  position: relative;
+}
+
+.app-sheet.has-left-taskbar,
+.app-sheet.has-right-taskbar {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.main-content-pane {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   VERTICAL TASKBAR DOCK (Neo-Minimalist Bento Dock - Left / Right Support)
+   ========================================================================== */
+.left-taskbar-dock,
+.right-taskbar-dock {
+  width: 250px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  background: var(--bg-pill-nav);
+  border: var(--border-ink);
+  border-radius: 32px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 0 var(--ink-primary);
+  z-index: 100;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.left-taskbar-dock::-webkit-scrollbar,
+.right-taskbar-dock::-webkit-scrollbar {
+  width: 4px;
+}
+.left-taskbar-dock::-webkit-scrollbar-thumb,
+.right-taskbar-dock::-webkit-scrollbar-thumb {
+  background: rgba(20, 20, 20, 0.2);
+  border-radius: 4px;
+}
+
+.taskbar-brand-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 0 6px;
+}
+
+.taskbar-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskbar-brand-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--ink-primary);
+  line-height: 1.1;
+}
+
+.taskbar-brand-sub {
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  font-weight: 600;
+}
+
+.btn-taskbar-action {
+  background: var(--accent-yellow);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: 10px 14px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--ink-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 3px 0 var(--ink-primary);
+  transition: var(--transition);
+  margin-bottom: 12px;
+  width: 100%;
+}
+.btn-taskbar-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--ink-primary);
+}
+.btn-taskbar-action:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--ink-primary);
+}
+
+.taskbar-timer-chip {
+  background: #FFFFFF;
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 0 var(--ink-primary);
+}
+.taskbar-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  animation: pulseDot 1.2s infinite alternate;
+}
+@keyframes pulseDot {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+.taskbar-divider {
+  width: 100%;
+  height: 1.5px;
+  background: var(--ink-primary);
+  margin: 10px 0;
+  opacity: 0.8;
+}
+
+.taskbar-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.taskbar-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.taskbar-link i {
+  font-size: 0.95rem;
+  width: 18px;
+  text-align: center;
+}
+.taskbar-link:hover {
+  background: rgba(0, 0, 0, 0.06);
+  transform: translateX(-2px);
+}
+.taskbar-link.active {
+  background: var(--ink-primary);
+  color: #FFFFFF;
+  box-shadow: 0 2px 0 var(--ink-primary);
+}
+
+.taskbar-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px 0;
+  margin-top: 6px;
+}
+
+.taskbar-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.taskbar-user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ink-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--ink-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.taskbar-user-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.taskbar-logout-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+.taskbar-logout-btn:hover {
+  color: var(--accent-orange);
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   TOP FLOATING PILL NAVBAR (Exact Match to Screenshot)
+   ========================================================================== */
+.top-pill-navbar {
+  background: var(--bg-pill-nav);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px 8px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+  width: 100%;
+}
+
+.nav-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-glyph {
+  width: 32px;
+  height: 32px;
+  background: var(--ink-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-yellow);
+  font-size: 0.95rem;
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--ink-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-divider-line {
+  width: 24px;
+  height: 1.5px;
+  background: var(--ink-primary);
+  margin: 0 4px;
+}
+
+.nav-links-scroll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-links-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-pill-link {
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.nav-pill-link:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.nav-pill-link.active {
+  background: var(--ink-primary);
+  color: #FFFFFF;
+}
+
+.nav-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-nav-login {
+  background: transparent;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.btn-nav-signup {
+  background: var(--accent-yellow);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: 8px 20px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+  box-shadow: 0 2px 0 var(--ink-primary);
+}
+.btn-nav-signup:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--ink-primary);
+}
+.btn-nav-signup:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--ink-primary);
+}
+
+/* ==========================================================================
+   BUTTONS (Connected Dual-Pill & Standard Bento Buttons)
+   ========================================================================== */
+.btn-dual-pill {
+  display: inline-flex;
+  align-items: center;
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  box-shadow: 0 3px 0 var(--ink-primary);
+  transition: var(--transition);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-dual-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 var(--ink-primary);
+}
+.btn-dual-pill:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--ink-primary);
+}
+
+.dual-pill-left {
+  background: var(--ink-primary);
+  color: #FFFFFF;
+  padding: 13px 26px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dual-pill-right {
+  background: var(--bg-card-cream);
+  color: var(--ink-primary);
+  padding: 13px 22px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-left: var(--border-ink);
+}
+
+.btn-pill-dark {
+  background: var(--ink-primary);
+  color: #FFFFFF;
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: 10px 22px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 0 var(--ink-primary);
+  transition: var(--transition);
+  text-decoration: none;
+}
+.btn-pill-dark:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--ink-primary);
+}
+
+.btn-pill-cream {
+  background: var(--bg-card-cream);
+  color: var(--ink-primary);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: 9px 20px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+.btn-pill-cream:hover {
+  background: #DDD7CD;
+}
+
+.circle-arrow-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: var(--border-ink);
+  background: var(--accent-yellow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.circle-arrow-btn:hover {
+  transform: scale(1.08) rotate(15deg);
+}
+
+/* ==========================================================================
+   BENTO CARDS & DECORATIVE BADGES
+   ========================================================================== */
+.bento-card {
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.bento-card:hover {
+  box-shadow: 0 6px 0 var(--ink-primary);
+  transform: translateY(-2px);
+}
+
+.bento-white {
+  background: var(--bg-card-white);
+}
+
+.bento-cream {
+  background: var(--bg-card-cream);
+}
+
+.bento-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+/* Overlapping Colored Circles Badge (from Hero title) */
+.bubble-pill-decor {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+.bubble-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: var(--border-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+.bubble-circle:first-child {
+  margin-left: 0;
+}
+.bubble-orange {
+  background: var(--accent-orange);
+  color: #fff;
+}
+.bubble-yellow {
+  background: var(--accent-yellow);
+  color: var(--ink-primary);
+}
+
+/* Diamond Review Pill */
+.review-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  background: var(--bg-card-white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+.diamond-stars {
+  color: var(--accent-orange);
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+}
+
+/* Clean SVG Barcode Graphic */
+.svg-barcode {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 48px;
+  padding: 4px 6px;
+  background: transparent;
+}
+.barcode-bar {
+  background: var(--ink-primary);
+  height: 100%;
+}
+
+/* Overlapping Avatar Team */
+.avatar-stack {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: var(--border-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: -10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.avatar-circle:first-child {
+  margin-left: 0;
+}
+
+/* Circular Portrait Spotlight */
+.spotlight-circle-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: var(--border-ink);
+  background: var(--accent-orange);
+  margin: 12px auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Cascading 3D Cards Graphic (from Card 1 in screenshot) */
+.stacked-cards-graphic {
+  position: relative;
+  width: 110px;
+  height: 70px;
+  margin: 16px auto 10px;
+}
+.stacked-tile {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+.stacked-tile:nth-child(1) { left: 0; top: 12px; opacity: 0.35; transform: rotate(-8deg); }
+.stacked-tile:nth-child(2) { left: 16px; top: 8px; opacity: 0.55; transform: rotate(-4deg); }
+.stacked-tile:nth-child(3) { left: 32px; top: 4px; opacity: 0.8; transform: rotate(0deg); }
+.stacked-tile:nth-child(4) { left: 48px; top: 0px; opacity: 1; transform: rotate(4deg); }
+
+/* ==========================================================================
+   VIEW SWITCHER CONTAINER
+   ========================================================================== */
+.content-view {
+  display: none;
+  animation: fadeInView 0.25s ease;
+}
+.content-view.active {
+  display: block;
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Header Bar */
+.view-sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: var(--border-ink);
+}
+.view-title-wrap h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.view-title-wrap p {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 18, 18, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--bg-sheet);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  padding: 18px 24px;
+  border-bottom: var(--border-ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--ink-primary);
+}
+.modal-body {
+  padding: 24px;
+}
+.modal-footer {
+  padding: 16px 24px;
+  border-top: var(--border-ink);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Form Controls in Neo-Minimalist Style */
+.form-group {
+  margin-bottom: 18px;
+}
+.form-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: var(--bg-card-white);
+  border: var(--border-ink);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  transition: var(--transition);
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  background: #FFF;
+  box-shadow: 0 3px 0 var(--ink-primary);
+}
+
+/* Toast Container */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card-white);
+  border: var(--border-ink);
+  color: var(--ink-primary);
+  font-size: 0.86rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  animation: slideToast 0.25s ease;
+}
+.toast.success { background: #F0FFF4; border-color: #2E7D32; }
+.toast.error { background: #FFF5F5; border-color: #C53030; }
+
+@keyframes slideToast {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  body {
+    padding: 12px;
+  }
+  .app-sheet {
+    padding: 16px 18px 36px;
+    border-radius: 24px;
+  }
+  .top-pill-navbar {
+    flex-wrap: wrap;
+    border-radius: 20px;
+    padding: 12px;
+  }
+}

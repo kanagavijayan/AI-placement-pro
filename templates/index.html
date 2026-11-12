@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI PLACEMENT PRO – Interactive Online Placement Training</title>
+  <!-- Google Fonts: Plus Jakarta Sans & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Custom Stylesheets (Matching the uploaded design) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/agents.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/trackme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/resume.css') }}">
+</head>
+<body>
+
+  <!-- Main Application Sheet with Left-Side Taskbar Dock -->
+  <div class="app-sheet has-left-taskbar">
+
+    <!-- ====================================================================
+         LEFT SIDE TASKBAR DOCK (Neo-Minimalist Bento Vertical Dock)
+         ==================================================================== -->
+    <aside class="left-taskbar-dock">
+      <!-- Brand at Top of Taskbar -->
+      <div class="taskbar-brand-section">
+        <div class="brand-glyph">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="taskbar-brand-text">
+          <span class="taskbar-brand-title">AI PLACEMENT PRO</span>
+          <span class="taskbar-brand-sub">Placement Partner</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Button -->
+      <button class="btn-taskbar-action" onclick="quickStartTracking()">
+        <i class="fa-solid fa-play"></i> Start Tracking
+      </button>
+
+      <!-- Live Active Timer Chip -->
+      <div class="taskbar-timer-chip" id="taskbar-timer-chip" style="display: none;">
+        <span class="taskbar-pulse-dot"></span>
+        <span id="taskbar-timer-clock">00:00:00</span>
+      </div>
+
+      <div class="taskbar-divider"></div>
+
+      <!-- Vertical Taskbar Navigation Links -->
+      <nav class="taskbar-links-list">
+        <a class="taskbar-link active" onclick="navigateTo('dashboard')">
+          <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('agents-hub')">
+          <i class="fa-solid fa-microchip"></i> <span>AI Agents</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('agent-aptitude')">
+          <i class="fa-solid fa-calculator"></i> <span>Aptitude</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('agent-coding')">
+          <i class="fa-solid fa-code"></i> <span>Coding Lab</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('agent-technical')">
+          <i class="fa-solid fa-server"></i> <span>Technical Round</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('agent-hr')">
+          <i class="fa-solid fa-user-tie"></i> <span>HR Round</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('trackme')">
+          <i class="fa-solid fa-stopwatch-20"></i> <span>Track Me</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('study-planner')">
+          <i class="fa-solid fa-brain"></i> <span>Study Planner</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('mock-tests')">
+          <i class="fa-solid fa-list-check"></i> <span>Mock Tests</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('resume-builder')">
+          <i class="fa-solid fa-file-lines"></i> <span>Resume Builder</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('company-prep')">
+          <i class="fa-solid fa-building-columns"></i> <span>Companies</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('my-profile')">
+          <i class="fa-solid fa-user"></i> <span>My Profile</span>
+        </a>
+        <a class="taskbar-link" onclick="navigateTo('settings')">
+          <i class="fa-solid fa-sliders"></i> <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="taskbar-divider"></div>
+
+      <!-- Footer with User & Sign Out -->
+      <div class="taskbar-footer-row">
+        <div class="taskbar-user-info">
+          <div class="taskbar-user-avatar" id="sidebar-user-avatar">AL</div>
+          <span class="taskbar-user-name" id="sidebar-user-name">Candidate</span>
+        </div>
+        <button class="taskbar-logout-btn" onclick="handleLogout()" title="Log out">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Right/Center Main Content Workspace -->
+    <main class="main-content-pane">
+
+      <!-- ====================================================================
+           VIEW 1: STUDENT DASHBOARD (BENTO GRID HERO MATCHING SCREENSHOT)
+           ==================================================================== -->
+      <section class="content-view active" id="view-dashboard">
+      <div class="hero-bento-grid">
+
+        <!-- COLUMN 1 (Left): 174+ Card & Secrets of Placement Ticket -->
+        <div class="bento-col-1">
+          <!-- Card 1: 174+ Practice Programs -->
+          <div class="bento-card bento-white card-tracks-stat">
+            <div class="tracks-stat-header">
+              <div>
+                <div class="tracks-number" id="bento-tracks-count">180+</div>
+                <div class="tracks-label">Placement topics</div>
+              </div>
+              <div class="circle-arrow-btn" onclick="navigateTo('agents-hub')" title="Explore Topics">
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.95rem;"></i>
+              </div>
+            </div>
+
+            <!-- Cascading 3D Cards Graphic (from screenshot) -->
+            <div class="stacked-cards-graphic">
+              <div class="stacked-tile"></div>
+              <div class="stacked-tile"></div>
+              <div class="stacked-tile"></div>
+              <div class="stacked-tile"></div>
+            </div>
+          </div>
+
+          <!-- Card 2: Secrets of Placement Ticket / Barcode -->
+          <div class="bento-card bento-cream card-ticket-secrets">
+            <div>
+              <div class="ticket-tag-row">
+                <span class="ticket-title">Secrets of placement</span>
+                <span class="ticket-badge">TOP TIER</span>
+              </div>
+              <p class="ticket-desc">Placement Master Class: Unlocking the Secrets of Technical & Aptitude Excellence.</p>
+            </div>
+
+            <div>
+              <div class="ticket-meta-dates">
+                <span>Placement Season</span>
+                <span id="dash-streak-date">Active Streak</span>
+              </div>
+              <div class="ticket-bottom-row">
+                <div>
+                  <div class="ticket-time-bold" id="dash-total-hours-ticket">35h 20m</div>
+                  <div class="ticket-time-sub" id="dash-streak-sub">7 Days Streak 🔥</div>
+                </div>
+
+                <!-- Clean SVG Barcode -->
+                <div class="svg-barcode" title="Verified SQLite Student Ledger">
+                  <div class="barcode-bar" style="width: 3px;"></div>
+                  <div class="barcode-bar" style="width: 1.5px;"></div>
+                  <div class="barcode-bar" style="width: 4px;"></div>
+                  <div class="barcode-bar" style="width: 2px;"></div>
+                  <div class="barcode-bar" style="width: 5px;"></div>
+                  <div class="barcode-bar" style="width: 1.5px;"></div>
+                  <div class="barcode-bar" style="width: 3px;"></div>
+                  <div class="barcode-bar" style="width: 2px;"></div>
+                  <div class="barcode-bar" style="width: 4px;"></div>
+                  <div class="barcode-bar" style="width: 1px;"></div>
+                  <div class="barcode-bar" style="width: 3.5px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 2 (Middle): Review Pill + Team Card + Spotlight Card -->
+        <div class="bento-col-2">
+          <!-- Top Review Pill -->
+          <div style="display: flex; justify-content: flex-start;">
+            <div class="review-pill">
+              <span class="diamond-stars">◆◆◆◆◆</span>
+              <span>4.9 review</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Team / AI Agents -->
+          <div class="bento-card bento-cream card-team-agents">
+            <div class="avatar-stack">
+              <div class="avatar-circle" style="background: #141414;">AP</div>
+              <div class="avatar-circle" style="background: var(--accent-orange);">CD</div>
+              <div class="avatar-circle" style="background: #4A90E2;">TC</div>
+              <div class="avatar-circle" style="background: var(--accent-yellow); color: #141414;">HR</div>
+            </div>
+            <h3 class="team-heading">AI Agents</h3>
+            <p class="team-desc">Our placement suite boasts highly skilled and autonomous AI agents for aptitude, coding, core CS, and behavioral rounds.</p>
+          </div>
+
+          <!-- Card 4: Spotlight / Interview Simulator -->
+          <div class="bento-card bento-cream card-spotlight" onclick="navigateTo('agent-technical')" style="cursor: pointer;">
+            <div class="spotlight-top-bar">
+              <span>Interview prep</span>
+              <span>•••</span>
+            </div>
+
+            <!-- Terracotta Circular Spotlight Portrait -->
+            <div class="spotlight-circle-container">
+              <i class="fa-solid fa-headset" style="font-size: 3.2rem; color: #fff;"></i>
+            </div>
+
+            <div class="spotlight-bottom-info">
+              <h4>Mock interviews</h4>
+              <p>Practice realistic technical and HR discussions with instant AI scoring.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 3 (Right): Hero Editorial Title, Description, Dual Button, Bottom Stats -->
+        <div class="bento-col-3">
+          <div class="hero-text-block">
+            <h1 class="hero-main-title">
+              Interactive online placement education that inspire
+              <span class="bubble-pill-decor">
+                <span class="bubble-circle bubble-orange"><i class="fa-solid fa-sparkles"></i></span>
+                <span class="bubble-circle bubble-yellow">✧</span>
+              </span>
+            </h1>
+            <p class="hero-description">
+              Discover the power of AI placement coaching through our comprehensive platform, where passionate intelligent agents mentor students of all disciplines to unleash their problem-solving potential and crack dream job offers.
+            </p>
+
+            <!-- Connected Dual Pill Button (from screenshot) -->
+            <div class="btn-dual-pill">
+              <div class="dual-pill-left" onclick="quickStartTracking()">
+                Start tracking <i class="fa-solid fa-arrow-right"></i>
+              </div>
+              <div class="dual-pill-right" onclick="navigateTo('mock-tests')">
+                Take mock test <i class="fa-solid fa-play"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Two Stat Cards (from screenshot) -->
+          <div class="hero-bottom-stats-row">
+            <!-- Left Stat Card -->
+            <div class="stat-pill-card">
+              <div class="stat-pill-header">
+                <span class="stat-diamond-icon">✦</span>
+                <span class="stat-line-rule"></span>
+              </div>
+              <div class="stat-big-number" id="dash-solved-big">12k+</div>
+              <p class="stat-subtext">Our online placement platform has proudly evaluated over 12,000 algorithmic submissions.</p>
+            </div>
+
+            <!-- Right Stat Card -->
+            <div class="stat-pill-card">
+              <div class="stat-pill-header">
+                <span class="stat-diamond-icon">✦</span>
+                <span class="stat-line-rule"></span>
+                <span class="stat-tag-pill">placement</span>
+              </div>
+              <div class="stat-big-number" id="dash-hours-big">34k</div>
+              <p class="stat-subtext">We have dedicated an impressive 34,000 hours of active online placement instruction.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- LOWER DASHBOARD: Weekly Progress Chart & Real-Time Activities -->
+      <div class="dashboard-lower-grid">
+        <!-- Weekly Learning Chart -->
+        <div class="bento-card bento-white analytics-card">
+          <div class="analytics-header-row">
+            <h3 class="analytics-title">
+              <i class="fa-solid fa-chart-column" style="color: var(--accent-orange);"></i> Weekly Study Progress (Hours)
+            </h3>
+            <button class="btn-pill-cream" onclick="loadDashboard()">
+              <i class="fa-solid fa-rotate-right"></i> Refresh
+            </button>
+          </div>
+          <div class="chart-box-wrap">
+            <canvas id="weeklyProgressChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Active Goals & Activity Feed -->
+        <div class="bento-card bento-cream analytics-card">
+          <div class="analytics-header-row">
+            <h3 class="analytics-title">
+              <i class="fa-solid fa-bullseye" style="color: var(--accent-orange);"></i> Active Goals
+            </h3>
+            <button class="btn-pill-cream" onclick="openAddProgressModal()">+ Progress</button>
+          </div>
+          <div class="activity-ledger-list" id="dashboard-goals-list">
+            <!-- Populated via dashboard.js -->
+          </div>
+
+          <h4 style="font-size: 0.92rem; font-weight: 800; margin: 20px 0 10px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-clock-rotate-left"></i> Recent Activity
+          </h4>
+          <div class="activity-ledger-list" id="dashboard-activity-list">
+            <!-- Populated via dashboard.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 2: AI PLACEMENT AGENTS HUB
+         ==================================================================== -->
+    <section class="content-view" id="view-agents-hub">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Specialized Autonomous AI Agents</h2>
+          <p>Select any of the 4 dedicated placement agents to begin structured simulation and training.</p>
+        </div>
+      </div>
+
+      <div class="agents-bento-grid">
+        <!-- Agent 1 Card -->
+        <div class="bento-card bento-white agent-card-item" onclick="navigateTo('agent-aptitude')">
+          <div>
+            <div class="agent-top-row">
+              <span class="agent-badge-pill">Agent 1</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-orange);">Quantitative & Logic</span>
+            </div>
+            <div class="agent-avatar-spotlight" style="background: var(--accent-orange);">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <h3 class="agent-title">Aptitude Agent</h3>
+            <p class="agent-desc">Quantitative Aptitude, Logical Reasoning, and Verbal Ability with step-by-step mathematical solutions and timed shortcuts.</p>
+            <div class="agent-tags-row">
+              <span class="tag-pill">Time & Work</span>
+              <span class="tag-pill">Probability</span>
+              <span class="tag-pill">Syllogisms</span>
+            </div>
+          </div>
+          <button class="btn-pill-dark" style="width: 100%; justify-content: center;">Launch Agent →</button>
+        </div>
+
+        <!-- Agent 2 Card -->
+        <div class="bento-card bento-cream agent-card-item" onclick="navigateTo('agent-coding')">
+          <div>
+            <div class="agent-top-row">
+              <span class="agent-badge-pill">Agent 2</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #141414;">Algorithms & DSA</span>
+            </div>
+            <div class="agent-avatar-spotlight" style="background: #141414;">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h3 class="agent-title">Coding Agent</h3>
+            <p class="agent-desc">Develop algorithmic problem-solving fluency in Python, Java, C++, and C with code debugging, Big-O analysis, and testcase verification.</p>
+            <div class="agent-tags-row">
+              <span class="tag-pill">Trees & Graphs</span>
+              <span class="tag-pill">Dynamic Prog</span>
+              <span class="tag-pill">Complexity</span>
+            </div>
+          </div>
+          <button class="btn-pill-dark" style="width: 100%; justify-content: center;">Launch Agent →</button>
+        </div>
+
+        <!-- Agent 3 Card -->
+        <div class="bento-card bento-white agent-card-item" onclick="navigateTo('agent-technical')">
+          <div>
+            <div class="agent-top-row">
+              <span class="agent-badge-pill">Agent 3</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #4A90E2;">Core Engineering</span>
+            </div>
+            <div class="agent-avatar-spotlight" style="background: #4A90E2;">
+              <i class="fa-solid fa-server"></i>
+            </div>
+            <h3 class="agent-title">Technical Interviewer</h3>
+            <p class="agent-desc">Simulate realistic software engineering technical rounds covering DBMS, Operating Systems, Computer Networks, and OOP with scoring.</p>
+            <div class="agent-tags-row">
+              <span class="tag-pill">ACID & Indexes</span>
+              <span class="tag-pill">OS Deadlocks</span>
+              <span class="tag-pill">TCP/IP</span>
+            </div>
+          </div>
+          <button class="btn-pill-dark" style="width: 100%; justify-content: center;">Launch Agent →</button>
+        </div>
+
+        <!-- Agent 4 Card -->
+        <div class="bento-card bento-cream agent-card-item" onclick="navigateTo('agent-hr')">
+          <div>
+            <div class="agent-top-row">
+              <span class="agent-badge-pill">Agent 4</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-orange);">Behavioral & STAR</span>
+            </div>
+            <div class="agent-avatar-spotlight" style="background: var(--accent-yellow); color: #141414;">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h3 class="agent-title">HR Interview Coach</h3>
+            <p class="agent-desc">Prepare for behavioral questions, self-introduction, conflict resolution, leadership scenarios, and culture fit evaluations.</p>
+            <div class="agent-tags-row">
+              <span class="tag-pill">Elevator Pitch</span>
+              <span class="tag-pill">STAR Method</span>
+              <span class="tag-pill">Culture Fit</span>
+            </div>
+          </div>
+          <button class="btn-pill-dark" style="width: 100%; justify-content: center;">Launch Agent →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: AGENT 1 - APTITUDE CHAT
+         ==================================================================== -->
+    <section class="content-view" id="view-agent-aptitude">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Aptitude Placement Agent</h2>
+          <p>Quantitative Aptitude, Logical Reasoning, and Verbal Ability practice with step-by-step mathematical breakdowns.</p>
+        </div>
+        <button class="btn-pill-cream" onclick="clearAgentChat('aptitude')"><i class="fa-solid fa-trash-can"></i> Clear Chat</button>
+      </div>
+
+      <div class="chat-bento-container">
+        <div class="chat-bento-header">
+          <div class="agent-header-info">
+            <div class="msg-avatar" style="background: var(--accent-orange); color: #fff;"><i class="fa-solid fa-calculator"></i></div>
+            <div>
+              <span style="font-weight: 800; font-size: 0.95rem;">Quantitative & Reasoning Coach</span>
+              <div style="font-size: 0.72rem; color: var(--ink-muted); display: flex; align-items: center; gap: 6px;">
+                <span class="agent-live-dot"></span> Active Autonomous Tutor
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chat-messages-aptitude"></div>
+
+        <div class="quick-chips-row">
+          <span style="font-size: 0.76rem; font-weight: 700; display: flex; align-items: center;">Quick Prompts:</span>
+          <button class="chip-btn" onclick="sendQuickPrompt('aptitude', 'Give me 2 Quantitative practice questions on Time and Work with step-by-step solutions.')">Time & Work</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('aptitude', 'Explain the relative speed concept for trains moving in opposite directions with a numerical challenge.')">Speed & Distance</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('aptitude', 'Provide a probability problem on drawing colored balls from a bag with detailed calculation.')">Probability</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('aptitude', 'Give me a Syllogism question with two statements and two conclusions.')">Syllogisms</button>
+        </div>
+
+        <div class="chat-input-bar">
+          <input type="text" id="chat-input-aptitude" class="chat-input-field" placeholder="Ask an aptitude problem or submit your solution for verification..." onkeydown="if(event.key==='Enter') sendChatMessage('aptitude')">
+          <button class="btn-pill-dark" onclick="sendChatMessage('aptitude')"><i class="fa-solid fa-paper-plane"></i> Send</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: AGENT 2 - CODING PRACTICE
+         ==================================================================== -->
+    <section class="content-view" id="view-agent-coding">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Coding Practice & Algorithmic Studio</h2>
+          <p>DSA challenges, real-time code tester, Big-O complexity advisor, and debugging assistance.</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <select class="form-select" id="coding-lang-select" style="width: 140px; padding: 7px 14px; font-weight: 700;">
+            <option value="Python">Python 3</option>
+            <option value="Java">Java</option>
+            <option value="C++">C++</option>
+            <option value="C">C</option>
+          </select>
+          <button class="btn-pill-dark" onclick="runCandidateCode()"><i class="fa-solid fa-play"></i> Run & Test</button>
+        </div>
+      </div>
+
+      <div class="coding-workbench">
+        <!-- Code Editor -->
+        <div class="code-editor-card">
+          <div class="editor-toolbar">
+            <span style="font-size: 0.82rem; font-weight: 800;"><i class="fa-solid fa-code"></i> Solution Editor</span>
+            <button class="chip-btn" onclick="loadSampleCode()">Load Sample Challenge</button>
+          </div>
+          <textarea id="coding-editor-textarea" class="code-textarea" spellcheck="false"># Challenge: Two Pointers Target Pair
+# Given a sorted array nums and target value, return True if a pair sums to target.
+
+def find_target_pair(nums, target):
+    left = 0
+    right = len(nums) - 1
+    while left < right:
+        curr_sum = nums[left] + nums[right]
+        if curr_sum == target:
+            return True
+        elif curr_sum < target:
+            left += 1
+        else:
+            right -= 1
+    return False
+
+# Test run
+print(find_target_pair([2, 7, 11, 15], 9))
+</textarea>
+          <div id="code-execution-output" style="background: #0D0D0D; padding: 14px 18px; border-top: var(--border-ink); font-family: var(--font-mono); font-size: 0.82rem; color: #81E6D9; min-height: 85px;">
+            Ready to test. Click "Run & Test" to evaluate testcases against database.
+          </div>
+        </div>
+
+        <!-- Chat with Coding Coach -->
+        <div class="chat-bento-container" style="height: 100%;">
+          <div class="chat-bento-header">
+            <div class="agent-header-info">
+              <div class="msg-avatar" style="background: #141414; color: #fff;"><i class="fa-solid fa-code"></i></div>
+              <div>
+                <span style="font-weight: 800; font-size: 0.95rem;">AI Code Reviewer</span>
+                <div style="font-size: 0.72rem; color: var(--ink-muted);">DSA & Complexity Advisor</div>
+              </div>
+            </div>
+            <button class="chip-btn" onclick="clearAgentChat('coding')"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+          <div class="chat-messages" id="chat-messages-coding"></div>
+          <div class="quick-chips-row">
+            <button class="chip-btn" onclick="sendQuickPrompt('coding', 'Explain the optimal time and space complexity of inverting a binary tree.')">Tree Traversal</button>
+            <button class="chip-btn" onclick="sendQuickPrompt('coding', 'Review this code for edge cases: what happens with empty array or duplicate elements?')">Edge Cases</button>
+            <button class="chip-btn" onclick="sendQuickPrompt('coding', 'Give me a medium dynamic programming challenge on 0/1 knapsack.')">DP Challenge</button>
+          </div>
+          <div class="chat-input-bar">
+            <input type="text" id="chat-input-coding" class="chat-input-field" placeholder="Ask about algorithms, Big-O, or debug help..." onkeydown="if(event.key==='Enter') sendChatMessage('coding')">
+            <button class="btn-pill-dark" onclick="sendChatMessage('coding')"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 5: AGENT 3 - TECHNICAL INTERVIEW
+         ==================================================================== -->
+    <section class="content-view" id="view-agent-technical">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Technical Interview Round Simulator</h2>
+          <p>Practice explaining core concepts in DBMS, Operating Systems, Computer Networks, and OOP with scoring.</p>
+        </div>
+        <button class="btn-pill-cream" onclick="clearAgentChat('technical')"><i class="fa-solid fa-trash-can"></i> Clear</button>
+      </div>
+
+      <div class="chat-bento-container">
+        <div class="chat-bento-header">
+          <div class="agent-header-info">
+            <div class="msg-avatar" style="background: #4A90E2; color: #fff;"><i class="fa-solid fa-server"></i></div>
+            <div>
+              <span style="font-weight: 800; font-size: 0.95rem;">Senior Technical Interviewer</span>
+              <div style="font-size: 0.72rem; color: var(--ink-muted);"><span class="agent-live-dot"></span> Evaluating Core CS Fundamentals</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chat-messages-technical"></div>
+        <div class="quick-chips-row">
+          <span style="font-size: 0.76rem; font-weight: 700; display: flex; align-items: center;">Interview Drills:</span>
+          <button class="chip-btn" onclick="sendQuickPrompt('technical', 'Ask me a challenging interview question on DBMS indexing, B+ trees, and ACID properties.')">DBMS Drill</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('technical', 'Simulate an interview question on Operating System Deadlocks and Banker algorithm.')">OS Deadlocks</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('technical', 'Explain what happens under the hood when a URL is entered into the browser.')">Networking Protocol</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('technical', 'Explain the SOLID principles in Object-Oriented Design with simple examples.')">OOP & SOLID</button>
+        </div>
+        <div class="chat-input-bar">
+          <input type="text" id="chat-input-technical" class="chat-input-field" placeholder="Speak your answer as in a technical interview..." onkeydown="if(event.key==='Enter') sendChatMessage('technical')">
+          <button class="btn-pill-dark" onclick="sendChatMessage('technical')"><i class="fa-solid fa-paper-plane"></i> Submit Answer</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 6: AGENT 4 - HR INTERVIEW
+         ==================================================================== -->
+    <section class="content-view" id="view-agent-hr">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>HR & Behavioral Interview Agent</h2>
+          <p>Master behavioral questions, self-introduction, conflict resolution, and culture fit using the STAR technique.</p>
+        </div>
+        <button class="btn-pill-cream" onclick="clearAgentChat('hr')"><i class="fa-solid fa-trash-can"></i> Clear</button>
+      </div>
+
+      <div class="chat-bento-container">
+        <div class="chat-bento-header">
+          <div class="agent-header-info">
+            <div class="msg-avatar" style="background: var(--accent-yellow); color: #141414;"><i class="fa-solid fa-user-tie"></i></div>
+            <div>
+              <span style="font-weight: 800; font-size: 0.95rem;">HR & Behavioral Coach</span>
+              <div style="font-size: 0.72rem; color: var(--ink-muted);"><span class="agent-live-dot"></span> Culture Fit & Communication Evaluator</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chat-messages-hr"></div>
+        <div class="quick-chips-row">
+          <span style="font-size: 0.76rem; font-weight: 700; display: flex; align-items: center;">HR Scenarios:</span>
+          <button class="chip-btn" onclick="sendQuickPrompt('hr', 'Evaluate my introduction: I am a final-year CS undergrad passionate about backend scalable web apps.')">Review My Intro</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('hr', 'How should I answer: Tell me about a time you had a serious conflict with a team member on a project deadline?')">STAR Conflict</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('hr', 'How do I answer: What is your greatest weakness without hurting my interview chances?')">Weakness Strategy</button>
+          <button class="chip-btn" onclick="sendQuickPrompt('hr', 'What are top tips for Group Discussions in campus placement rounds?')">Group Discussion</button>
+        </div>
+        <div class="chat-input-bar">
+          <input type="text" id="chat-input-hr" class="chat-input-field" placeholder="Type your behavioral or HR answer here for instant critique..." onkeydown="if(event.key==='Enter') sendChatMessage('hr')">
+          <button class="btn-pill-dark" onclick="sendChatMessage('hr')"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 7: TRACK ME - SYSTEM
+         ==================================================================== -->
+    <section class="content-view" id="view-trackme">
+      <!-- Live Study Timer Hero Card -->
+      <div class="track-timer-hero">
+        <div class="timer-left-details">
+          <span class="ticket-badge" style="margin-bottom: 8px; display: inline-block;">TRACK ME ENGINE</span>
+          <h3>Live Placement Study Timer</h3>
+          <p>Track your daily preparation hours in real-time. Automatically saves study sessions to SQLite and updates your streak.</p>
+          <div style="margin-top: 16px;">
+            <label class="form-label">Active Subject:</label>
+            <select id="timer-subject-select" class="form-select" style="max-width: 320px; font-weight: 700;">
+              <option value="Data Structures & Algorithms">Data Structures & Algorithms</option>
+              <option value="Quantitative Aptitude">Quantitative Aptitude</option>
+              <option value="Logical Reasoning">Logical Reasoning</option>
+              <option value="DBMS & SQL">DBMS & SQL</option>
+              <option value="Operating Systems">Operating Systems</option>
+              <option value="Computer Networks">Computer Networks</option>
+              <option value="HR & Behavioral">HR & Behavioral Practice</option>
+              <option value="Company Mock Prep">Company Mock Prep</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="timer-center-box">
+          <div class="timer-display-num" id="main-timer-clock">00:00:00</div>
+          <div class="timer-controls-row">
+            <button class="btn-pill-dark" id="btn-timer-toggle" onclick="toggleTimer()">
+              <i class="fa-solid fa-play"></i> START TRACKING
+            </button>
+            <button class="btn-pill-cream" id="btn-timer-stop" onclick="stopAndSaveTimer()" style="display: none; background: #FFD2D2;">
+              <i class="fa-solid fa-stop"></i> STOP & SAVE SESSION
+            </button>
+            <button class="btn-pill-cream" onclick="openAddProgressModal()">
+              <i class="fa-solid fa-circle-plus"></i> ADD PROGRESS
+            </button>
+          </div>
+        </div>
+
+        <!-- Streak Badge -->
+        <div class="streak-box-bento">
+          <div class="streak-flame-glyph">🔥</div>
+          <div>
+            <div class="streak-num-bold" id="trackme-streak-count">0 Days</div>
+            <div class="streak-label-sub">Active Study Streak</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower Bento Grid: Goals & Badges -->
+      <div class="track-bento-grid">
+        <div class="bento-card bento-white analytics-card">
+          <div class="analytics-header-row">
+            <h3 class="analytics-title"><i class="fa-solid fa-bullseye" style="color: var(--accent-orange);"></i> Placement Goals</h3>
+            <button class="btn-pill-cream" onclick="openCreateGoalModal()">+ New Goal</button>
+          </div>
+          <div class="activity-ledger-list" id="trackme-goals-list"></div>
+        </div>
+
+        <div class="bento-card bento-cream analytics-card">
+          <div class="analytics-header-row">
+            <h3 class="analytics-title"><i class="fa-solid fa-award" style="color: var(--accent-orange);"></i> Unlocked Badges</h3>
+            <span style="font-size: 0.74rem; font-weight: 700;" id="badges-unlocked-count">0 Badges</span>
+          </div>
+          <div class="badges-bento-shelf" id="trackme-badges-container"></div>
+        </div>
+      </div>
+
+      <!-- Historical Study Sessions Table -->
+      <div class="bento-card bento-white analytics-card" style="margin-bottom: 24px;">
+        <div class="analytics-header-row">
+          <h3 class="analytics-title"><i class="fa-solid fa-clock-rotate-left"></i> Tracked Study Sessions History</h3>
+          <span style="font-size: 0.78rem; font-weight: 600; color: var(--ink-dim);">Persistent in SQLite</span>
+        </div>
+        <div class="ledger-table-wrap">
+          <table class="ledger-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Duration (Minutes)</th>
+                <th>Notes</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="trackme-sessions-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Manual Progress Records Table -->
+      <div class="bento-card bento-white analytics-card">
+        <div class="analytics-header-row">
+          <h3 class="analytics-title"><i class="fa-solid fa-book-bookmark"></i> Manual Topic Progress Log</h3>
+          <button class="btn-pill-dark" onclick="openAddProgressModal()">+ Add Progress</button>
+        </div>
+        <div class="ledger-table-wrap">
+          <table class="ledger-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Topic</th>
+                <th>Difficulty</th>
+                <th>Solved</th>
+                <th>Logged Date</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="trackme-progress-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 8: AI PERSONALIZED STUDY PLANNER
+         ==================================================================== -->
+    <section class="content-view" id="view-study-planner">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>AI Personalized Study Planner</h2>
+          <p>Analyzes your actual test scores and study duration to isolate weak topics and create custom daily and weekly roadmaps.</p>
+        </div>
+        <button class="btn-pill-dark" onclick="generateAIStudyPlan()"><i class="fa-solid fa-wand-magic-sparkles"></i> Regenerate Plan</button>
+      </div>
+
+      <div class="bento-card bento-white analytics-card" id="planner-results-card">
+        <div id="planner-loading" style="text-align: center; padding: 40px; display: none;">
+          <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem;"></i>
+          <p style="margin-top: 12px; font-weight: 600;">AI is analyzing your placement data and generating an adaptive study roadmap...</p>
+        </div>
+        <div id="planner-content" class="msg-bubble" style="background: transparent; border: none; padding: 0;"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 9: MOCK TESTS
+         ==================================================================== -->
+    <section class="content-view" id="view-mock-tests">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Timed Placement Mock Assessments</h2>
+          <p>Authentic timed examination simulator with automated evaluation and detailed step-by-step explanations.</p>
+        </div>
+      </div>
+
+      <div id="mock-selector-grid" class="agents-bento-grid">
+        <div class="bento-card bento-white agent-card-item" onclick="startMockExam('aptitude', 'Quantitative & Logical Aptitude Test')">
+          <div>
+            <div class="agent-avatar-spotlight" style="background: var(--accent-orange);"><i class="fa-solid fa-calculator"></i></div>
+            <h3 class="agent-title">Aptitude Mock Exam</h3>
+            <p class="agent-desc">Quantitative math, logical puzzles, number series, and verbal ability. 6 Timed Questions.</p>
+          </div>
+          <button class="btn-pill-dark"><i class="fa-solid fa-play"></i> Start Timed Test</button>
+        </div>
+
+        <div class="bento-card bento-cream agent-card-item" onclick="startMockExam('technical', 'Computer Science Core Technical Assessment')">
+          <div>
+            <div class="agent-avatar-spotlight" style="background: #4A90E2;"><i class="fa-solid fa-server"></i></div>
+            <h3 class="agent-title">Core CS Technical Test</h3>
+            <p class="agent-desc">DBMS, Operating Systems, Computer Networks, and OOP concepts. 6 Timed Questions.</p>
+          </div>
+          <button class="btn-pill-dark"><i class="fa-solid fa-play"></i> Start Timed Test</button>
+        </div>
+
+        <div class="bento-card bento-white agent-card-item" onclick="startMockExam('coding_quiz', 'Algorithms & Data Structures Quiz')">
+          <div>
+            <div class="agent-avatar-spotlight" style="background: #141414;"><i class="fa-solid fa-code"></i></div>
+            <h3 class="agent-title">DSA & Complexity Quiz</h3>
+            <p class="agent-desc">Time complexity, hashing algorithms, graphs, and tree traversals. 4 Timed Questions.</p>
+          </div>
+          <button class="btn-pill-dark"><i class="fa-solid fa-play"></i> Start Timed Test</button>
+        </div>
+      </div>
+
+      <!-- Active Exam Screen -->
+      <div id="active-exam-container" style="display: none;">
+        <div class="bento-card bento-white analytics-card" style="margin-bottom: 20px;">
+          <div class="analytics-header-row">
+            <div>
+              <h3 id="exam-title-text" style="font-size: 1.25rem; font-weight: 800;">Active Examination</h3>
+              <span id="exam-question-progress" style="font-size: 0.8rem; color: var(--ink-muted);">Question 1 of 6</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div class="ticket-badge" style="font-size: 1.1rem; padding: 6px 14px;" id="exam-timer-display">
+                <i class="fa-solid fa-clock"></i> 10:00
+              </div>
+              <button class="btn-pill-cream" onclick="finishExamEarly()" style="background: #FFD2D2;">Submit Exam</button>
+            </div>
+          </div>
+
+          <div id="exam-question-box" style="padding: 20px 0;">
+            <h4 id="exam-q-text" style="font-size: 1.1rem; font-weight: 700; line-height: 1.5; margin-bottom: 20px;"></h4>
+            <div id="exam-options-container" style="display: flex; flex-direction: column; gap: 12px;"></div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <button class="btn-pill-cream" id="btn-exam-prev" onclick="navigateExamQuestion(-1)">← Previous</button>
+            <button class="btn-pill-dark" id="btn-exam-next" onclick="navigateExamQuestion(1)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Past Exam History -->
+      <div class="bento-card bento-white analytics-card" style="margin-top: 24px;">
+        <div class="analytics-header-row">
+          <h3 class="analytics-title"><i class="fa-solid fa-clock-rotate-left"></i> Past Examination History</h3>
+        </div>
+        <div class="ledger-table-wrap">
+          <table class="ledger-table">
+            <thead>
+              <tr>
+                <th>Test Title</th>
+                <th>Category</th>
+                <th>Score</th>
+                <th>Correct / Total</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="mock-history-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 10: RESUME BUILDER
+         ==================================================================== -->
+    <section class="content-view" id="view-resume-builder">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>ATS-Optimized Resume Builder</h2>
+          <p>Construct a placement-ready resume with AI bullet point optimization and ATS scoring.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div class="ats-score-pill">
+            <i class="fa-solid fa-shield-halved"></i> ATS Score: <span id="ats-score-display">88/100</span>
+          </div>
+          <button class="btn-pill-cream" onclick="saveResumeData()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+          <button class="btn-pill-dark" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
+        </div>
+      </div>
+
+      <div class="resume-bento-layout">
+        <!-- Editor -->
+        <div class="resume-editor-pane">
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;">Candidate Information</h3>
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="res-name" class="form-input" oninput="updateResumePreview()">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" id="res-email" class="form-input" oninput="updateResumePreview()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="text" id="res-phone" class="form-input" oninput="updateResumePreview()">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">LinkedIn</label>
+              <input type="text" id="res-linkedin" class="form-input" oninput="updateResumePreview()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">GitHub</label>
+              <input type="text" id="res-github" class="form-input" oninput="updateResumePreview()">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin: 0;">Professional Summary</label>
+              <button type="button" class="chip-btn" onclick="openAIBulletModal('res-summary')">✧ AI Enhance</button>
+            </div>
+            <textarea id="res-summary" class="form-textarea" rows="3" oninput="updateResumePreview()"></textarea>
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin: 0;">Projects</label>
+              <button type="button" class="chip-btn" onclick="openAIBulletModal('res-projects-text')">✧ AI Optimize</button>
+            </div>
+            <textarea id="res-projects-text" class="form-textarea" rows="4" oninput="updateResumePreview()"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Skills (Comma-separated)</label>
+            <input type="text" id="res-skills-input" class="form-input" oninput="updateResumePreview()">
+          </div>
+        </div>
+
+        <!-- ATS Preview Sheet -->
+        <div class="resume-preview-pane">
+          <div class="ats-resume-sheet" id="printable-resume">
+            <div class="ats-header">
+              <div class="ats-name" id="preview-name">JORDAN LEE</div>
+              <div class="ats-contact-line">
+                <span id="preview-email">jordan.lee@example.com</span> •
+                <span id="preview-phone">+91 98765 43210</span> •
+                <span id="preview-linkedin">linkedin.com/in/jordanlee</span>
+              </div>
+            </div>
+            <div class="ats-section">
+              <div class="ats-section-title">Professional Summary</div>
+              <p id="preview-summary" style="font-size: 10pt; color: #374151;"></p>
+            </div>
+            <div class="ats-section">
+              <div class="ats-section-title">Education</div>
+              <div class="ats-item-header">
+                <span>B.Tech in Computer Science & Engineering</span>
+                <span>2022 – 2026</span>
+              </div>
+              <div class="ats-item-sub">
+                <span>Institute of Engineering & Technology</span>
+                <span>CGPA: 8.85 / 10.0</span>
+              </div>
+            </div>
+            <div class="ats-section">
+              <div class="ats-section-title">Technical Projects</div>
+              <ul class="ats-bullets" id="preview-project-bullets">
+                <li>Engineered multi-agent placement platform with real-time timers and performance tracking.</li>
+              </ul>
+            </div>
+            <div class="ats-section">
+              <div class="ats-section-title">Technical Skills</div>
+              <div class="ats-skills-block" id="preview-skills-block">
+                <strong>Core Skills:</strong> Python, Java, SQL, Algorithms, Web Development
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 11: COMPANY PREPARATION
+         ==================================================================== -->
+    <section class="content-view" id="view-company-prep">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Targeted Company Recruitment Guides</h2>
+          <p>Curated recruitment patterns, round structures, and preparation strategies for top campus employers.</p>
+        </div>
+      </div>
+
+      <div class="quick-chips-row" id="company-tabs-bar" style="border-radius: var(--radius-pill); margin-bottom: 24px; padding: 8px 14px;"></div>
+
+      <div class="bento-card bento-white analytics-card" id="company-detail-card"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 12: MY PROFILE
+         ==================================================================== -->
+    <section class="content-view" id="view-my-profile">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Student Profile & Aspirations</h2>
+          <p>Your academic records, target dream package, and portfolio links.</p>
+        </div>
+      </div>
+
+      <div class="bento-card bento-white analytics-card" style="max-width: 760px; margin: 0 auto;">
+        <form onsubmit="handleProfileUpdate(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="prof-fullname" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">College / University</label>
+              <input type="text" id="prof-college" class="form-input" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Branch</label>
+              <input type="text" id="prof-branch" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">CGPA</label>
+              <input type="number" step="0.01" id="prof-cgpa" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Grad Year</label>
+              <input type="number" id="prof-gradyear" class="form-input">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Dream Company</label>
+              <input type="text" id="prof-targetcompany" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Package</label>
+              <input type="text" id="prof-targetpackage" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Bio / Career Pitch</label>
+            <textarea id="prof-bio" class="form-textarea" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="btn-pill-dark">Save Profile Details →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 13: SETTINGS
+         ==================================================================== -->
+    <section class="content-view" id="view-settings">
+      <div class="view-sub-header">
+        <div class="view-title-wrap">
+          <h2>Application Settings</h2>
+          <p>Configure Google Gemini AI API credentials and account security.</p>
+        </div>
+      </div>
+
+      <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+        <!-- Gemini Key -->
+        <div class="bento-card bento-white analytics-card">
+          <h3 class="analytics-title" style="margin-bottom: 8px;"><i class="fa-solid fa-key" style="color: var(--accent-orange);"></i> Google Gemini AI API Key</h3>
+          <p style="font-size: 0.82rem; color: var(--ink-muted); margin-bottom: 16px;">
+            AI PLACEMENT PRO includes an autonomous expert knowledge engine that runs out of the box. You can connect your free Google Gemini API key to activate live generative models. 
+            <a href="https://aistudio.google.com/" target="_blank" style="color: var(--primary); text-decoration: underline; margin-left: 4px;">Get free key at Google AI Studio &nearr;</a>
+          </p>
+          <div class="form-group">
+            <input type="password" id="settings-gemini-key" class="form-input" placeholder="AIzaSy...">
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button class="btn-pill-dark" onclick="saveGeminiApiKey()"><i class="fa-solid fa-floppy-disk"></i> Save & Connect Key</button>
+            <button class="btn-pill-light" type="button" onclick="testGeminiConnection()"><i class="fa-solid fa-plug"></i> Test Connection</button>
+          </div>
+          <div id="gemini-connection-status" style="margin-top: 14px; display: none; font-size: 0.85rem; padding: 10px 14px; border-radius: 8px;"></div>
+        </div>
+
+        <!-- Password Change -->
+        <div class="bento-card bento-cream analytics-card">
+          <h3 class="analytics-title" style="margin-bottom: 14px;"><i class="fa-solid fa-lock"></i> Change Password</h3>
+          <form onsubmit="handlePasswordChange(event)">
+            <div class="form-group">
+              <label class="form-label">Current Password</label>
+              <input type="password" id="settings-old-pass" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">New Password</label>
+              <input type="password" id="settings-new-pass" class="form-input" required>
+            </div>
+            <button type="submit" class="btn-pill-dark">Update Password →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    </main>
+
+  </div>
+
+  <!-- ====================================================================
+       MODALS: Add Progress, Create Goal, AI Bullet Optimizer
+       ==================================================================== -->
+  <!-- Modal 1: Add Progress -->
+  <div class="modal-overlay" id="modal-add-progress">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Record Placement Progress</h3>
+        <button class="modal-close" onclick="closeAddProgressModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form onsubmit="submitAddProgress(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select id="prog-subject" class="form-select">
+              <option value="Data Structures">Data Structures & Algorithms</option>
+              <option value="Quantitative Aptitude">Quantitative Aptitude</option>
+              <option value="Logical Reasoning">Logical Reasoning</option>
+              <option value="Operating Systems">Operating Systems</option>
+              <option value="DBMS">Database Management (DBMS)</option>
+              <option value="Computer Networks">Computer Networks</option>
+              <option value="HR & Behavioral">HR & Behavioral Practice</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Topic Name</label>
+            <input type="text" id="prog-topic" class="form-input" placeholder="e.g. Binary Search Trees, Permutations" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Difficulty</label>
+              <select id="prog-difficulty" class="form-select">
+                <option value="Easy">Easy</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Problems Solved</label>
+              <input type="number" id="prog-questions" class="form-input" value="5" min="1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Notes</label>
+            <textarea id="prog-notes" class="form-textarea" rows="2" placeholder="Key takeaways..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-pill-cream" onclick="closeAddProgressModal()">Cancel</button>
+          <button type="submit" class="btn-pill-dark">Save Record →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Create Goal -->
+  <div class="modal-overlay" id="modal-create-goal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Set Placement Goal</h3>
+        <button class="modal-close" onclick="closeCreateGoalModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form onsubmit="submitCreateGoal(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Goal Title</label>
+            <input type="text" id="goal-title-input" class="form-input" placeholder="e.g. Solve 5 Graph Problems" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select id="goal-type-select" class="form-select">
+                <option value="daily">Daily Goal</option>
+                <option value="weekly">Weekly Goal</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Quantity</label>
+              <input type="number" id="goal-target-val" class="form-input" value="3" min="1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Unit</label>
+            <select id="goal-unit-select" class="form-select">
+              <option value="problems">Problems</option>
+              <option value="hours">Hours</option>
+              <option value="tests">Mock Tests</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-pill-cream" onclick="closeCreateGoalModal()">Cancel</button>
+          <button type="submit" class="btn-pill-dark">Create Goal →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 3: AI Resume Bullet Optimizer -->
+  <div class="modal-overlay" id="modal-ai-bullet">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">✧ AI ATS Resume Optimizer</h3>
+        <button class="modal-close" onclick="closeAIBulletModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Your Current Draft</label>
+          <textarea id="ai-bullet-input" class="form-textarea" rows="3"></textarea>
+        </div>
+        <button class="btn-pill-dark" onclick="runAIBulletOptimizer()" style="margin-bottom: 14px;">
+          Generate ATS Enhancements ✧
+        </button>
+        <div id="ai-bullet-output-box" style="display: none; background: var(--bg-card-cream); padding: 14px; border-radius: 14px; border: var(--border-ink); font-size: 0.88rem; line-height: 1.55;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-pill-cream" onclick="closeAIBulletModal()">Close</button>
+        <button type="button" class="btn-pill-dark" id="btn-apply-bullet" onclick="applyAIBullet()" style="display: none;">Apply to Resume</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- JavaScript Controllers -->
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/agents.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/trackme.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/planner.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/mocktests.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/resume.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/company.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+</body>
+</html>
